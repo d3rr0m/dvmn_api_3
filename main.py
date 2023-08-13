@@ -1,6 +1,8 @@
 from urllib.parse import urlparse
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 import requests
+import os
+import argparse
 
 
 def is_bitlink(token, url):
@@ -52,8 +54,12 @@ def clicks_count(token, url):
 
 
 def main():
-    url = input('Введите ссылку: ').replace(' ', '')
-    token = dotenv_values('.env')['BITLY_ACCESS_TOKEN']
+    load_dotenv()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('url')
+    args = parser.parse_args()
+    url = args.url
+    token = os.getenv('BITLY_ACCESS_TOKEN')
 
     if is_bitlink(token, url):
         try:
