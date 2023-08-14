@@ -55,8 +55,12 @@ def clicks_count(token, url):
 
 def main():
     load_dotenv()
-    parser = argparse.ArgumentParser()
-    parser.add_argument('url')
+    parser = argparse.ArgumentParser(
+        description='''Программа сокращает средствами API bit.ly url,\
+            полученный в аргументе. Либо выводит кол-во кликов, если в\
+            аргуменет передан bit link.'''
+        )
+    parser.add_argument('url', help='URL для сокращения или подсчета кликов.')
     args = parser.parse_args()
     url = args.url
     token = os.getenv('BITLY_ACCESS_TOKEN')
