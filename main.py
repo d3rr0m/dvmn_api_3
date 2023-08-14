@@ -62,17 +62,17 @@ def main():
         )
     parser.add_argument('url', help='URL для сокращения или подсчета кликов.')
     args = parser.parse_args()
-    url = args.url
     token = os.environ['BITLY_ACCESS_TOKEN']
 
-    if is_bitlink(token, url):
+    if is_bitlink(token, args.url):
         try:
-            print(f'Кол-во кликов по ссылке {url}: {clicks_count(token, url)}')
+            print(f'Кол-во кликов по ссылке {args.url}:',
+                  f'{clicks_count(token, args.url)}')
         except requests.exceptions.HTTPError:
             print('Ошибка при получении кол-ва кликов.')
     else:
         try:
-            print('Битлинк: ', shorten_link(token, url))
+            print('Битлинк: ', shorten_link(token, args.url))
         except requests.exceptions.HTTPError:
             print('Введенный URL невозможно сократить.')
 
