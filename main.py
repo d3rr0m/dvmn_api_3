@@ -63,7 +63,7 @@ def main():
     parser.add_argument('url', help='URL для сокращения или подсчета кликов.')
     args = parser.parse_args()
     url = args.url
-    token = os.getenv('BITLY_ACCESS_TOKEN')
+    token = os.environ['BITLY_ACCESS_TOKEN']
 
     if is_bitlink(token, url):
         try:
